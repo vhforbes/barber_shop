@@ -9,8 +9,8 @@ const appointmentsRepository = new AppointmentsRepository();
 
 // Responsibilidade das rotas:
 // receber requisicao
-// chamar outro arquivo
-// devolveruma resposta
+// chamar outro arquivo (service)
+// devolver uma resposta
 
 appointmentsRouter.get("/", (req, res) => {
   const appointments = appointmentsRepository.all();

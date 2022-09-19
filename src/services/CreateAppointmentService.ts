@@ -4,8 +4,8 @@ import AppointmentsRepository from "../repositories/AppointmentsRepository";
 
 /**
  * [x] Recebimento das informacoes
- * [] Tratativa de erros/excessoes
- * [] Acesso ao repositorio
+ * [x] Tratativa de erros/excessoes
+ * [x] Acesso ao repositorio
  */
 
 interface Request {
