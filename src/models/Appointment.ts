@@ -1,18 +1,17 @@
-import { v4 } from "uuid";
+// import { v4 } from "uuid";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+// Decorator => A classe é um parametro sendo passado para a Entity
+@Entity("appointments")
 class Appointment {
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
+  @Column()
   provider: string;
 
+  @Column("time with time zone")
   date: Date;
-
-  // Omit => Omite o id do model Apointment
-  constructor({ provider, date }: Omit<Appointment, "id">) {
-    this.id = v4();
-    this.provider = provider;
-    this.date = date;
-  }
 }
 
 export default Appointment;
