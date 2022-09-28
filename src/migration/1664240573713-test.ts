@@ -11,6 +11,7 @@ export class test1664240573713 implements MigrationInterface {
             type: "varchar",
             isPrimary: true,
             generationStrategy: "uuid",
+            default: "uuid_generate_v4()",
           },
           {
             name: "provider",
@@ -19,7 +20,7 @@ export class test1664240573713 implements MigrationInterface {
           },
           {
             name: "date",
-            type: "timestamp with time zone",
+            type: "timestamp",
             isNullable: false,
           },
         ],

@@ -3,31 +3,32 @@ import { startOfHour, parseISO } from "date-fns";
 
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 import CreateAppointmetService from "../services/CreateAppointmentService";
+import { AppDataSource } from "../data-source";
+import Appointment from "../models/Appointment";
 
 const appointmentsRouter = Router();
-const appointmentsRepository = new AppointmentsRepository();
+const appointmentsRepository = AppointmentsRepository;
 
 // Responsibilidade das rotas:
 // receber requisicao
 // chamar outro arquivo (service)
 // devolver uma resposta
 
-appointmentsRouter.get("/", (req, res) => {
-  const appointments = appointmentsRepository.all();
+appointmentsRouter.get("/", async (req, res) => {
+  const appointments = await appointmentsRepository.find();
+
   return res.json(appointments);
 });
 
-appointmentsRouter.post("/", (req, res) => {
+appointmentsRouter.post("/", async (req, res) => {
   try {
     const { provider, date } = req.body;
 
     const parsedDate = parseISO(date);
 
-    const createAppointment = new CreateAppointmetService(
-      appointmentsRepository
-    );
+    const createAppointmentService = new CreateAppointmetService();
 
-    const appointment = createAppointment.execute({
+    const appointment = await createAppointmentService.execute({
       provider,
       date: parsedDate,
     });

@@ -1,7 +1,7 @@
 // import { v4 } from "uuid";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-// Decorator => A classe é um parametro sendo passado para a Entity
+// Decorator => A classe é um parametro sendo passado para o decorator Entity
 @Entity("appointments")
 class Appointment {
   @PrimaryGeneratedColumn("uuid")
@@ -10,8 +10,8 @@ class Appointment {
   @Column()
   provider: string;
 
-  @Column("time with time zone")
-  date: Date;
+  @Column("timestamp")
+  date: any;
 }
 
 export default Appointment;
