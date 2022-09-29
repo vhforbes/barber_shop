@@ -11,8 +11,8 @@ const appointmentsRepository = AppointmentsRepository;
 
 // Responsibilidade das rotas:
 // receber requisicao
-// chamar outro arquivo (service)
-// devolver uma resposta
+// chamar o service responsavel pelo determinado CRUD
+// devolver uma resposta ao client
 
 appointmentsRouter.get("/", async (req, res) => {
   const appointments = await appointmentsRepository.find();

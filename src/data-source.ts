@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { test1664240573713 } from "./migration/1664240573713-test";
 import Appointment from "./models/Appointment";

@@ -3,15 +3,9 @@ import "reflect-metadata";
 import express from "express";
 import routes from "./routes";
 import { AppDataSource } from "./data-source";
-import Appointment from "./models/Appointment";
 
 AppDataSource.initialize()
   .then(async () => {
-    // const appointment = new Appointment();
-    // appointment.date = "1999-01-08 04:05:06";
-    // appointment.provider = "Saww";
-    // await AppDataSource.manager.save(appointment);
-
     console.log("Data Source has been initialized!");
   })
   .catch((err) => {

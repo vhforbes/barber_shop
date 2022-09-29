@@ -4,8 +4,8 @@ import Appointment from "../models/Appointment";
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 
 /**
- * [x] Recebimento das informacoes
- * [x] Tratativa de erros/excessoes
+ * [x] Recebe as infos da chamada
+ * [x] Tratativa de erros/excessoes, logicas de negcio, ifs
  * [x] Acesso ao repositorio
  */
 
@@ -16,8 +16,12 @@ interface Request {
 
 class CreateAppointmetService {
   public async execute({ provider, date }: Request): Promise<Appointment> {
+    // Transforma a data em um horario inicial, 9:15 => 9:00
     const appointmentDate = startOfHour(date);
 
+    // Nao permitir um book de diversos appointments na mesma hora.
+    // 1 hora de intervalo entre eles
+    // Usa o metodo customizado do repositorio findByDate
     const findAppointmentInSameDate = await AppointmentsRepository.findByDate(
       appointmentDate
     );
