@@ -1,6 +1,8 @@
+import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { test1664240573713 } from "./migration/1664240573713-test";
+import { AppointmentAndUser1664240573713 } from "./migration/1664240573713-AppointmentAndUser";
 import Appointment from "./models/Appointment";
+import User from "./models/User";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -11,7 +13,7 @@ export const AppDataSource = new DataSource({
   database: "gobarber",
   synchronize: true,
   logging: false,
-  entities: [Appointment],
-  migrations: [test1664240573713],
+  entities: [Appointment, User],
+  migrations: [AppointmentAndUser1664240573713],
   subscribers: [],
 });
