@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from "typeorm";
 
 export class AppointmentAndUser1664240573713 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -25,12 +30,12 @@ export class AppointmentAndUser1664240573713 implements MigrationInterface {
           {
             name: "created_at",
             type: "timestamp",
-            default: "now()"
+            default: "now()",
           },
           {
             name: "updated_at",
             type: "timestamp",
-            default: "now()"
+            default: "now()",
           },
         ],
       })
@@ -62,29 +67,32 @@ export class AppointmentAndUser1664240573713 implements MigrationInterface {
           {
             name: "created_at",
             type: "timestamp",
-            default: "now()"
+            default: "now()",
           },
           {
             name: "updated_at",
             type: "timestamp",
-            default: "now()"
+            default: "now()",
           },
         ],
       })
     );
 
-    await queryRunner.createForeignKey('appointments', new TableForeignKey({
-      name: 'AppointmentProvider',
-      columnNames: ['provider_id'],
-      referencedColumnNames: ['id'],
-      referencedTableName: 'users',
-      onDelete: 'SET NULL',
-      onUpdate: 'CASCADE'
-    }))
+    await queryRunner.createForeignKey(
+      "appointments",
+      new TableForeignKey({
+        name: "AppointmentProvider",
+        columnNames: ["provider_id"],
+        referencedColumnNames: ["id"],
+        referencedTableName: "users",
+        onDelete: "SET NULL",
+        onUpdate: "CASCADE",
+      })
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('appointments', 'AppointmentProvider')
+    // await queryRunner.dropForeignKey("appointments", "AppointmentProvider");
     await queryRunner.dropTable("appointments");
     await queryRunner.dropTable("users");
   }

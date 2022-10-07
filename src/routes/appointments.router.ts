@@ -3,8 +3,6 @@ import { startOfHour, parseISO } from "date-fns";
 
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 import CreateAppointmetService from "../services/CreateAppointmentService";
-import { AppDataSource } from "../data-source";
-import Appointment from "../models/Appointment";
 
 const appointmentsRouter = Router();
 const appointmentsRepository = AppointmentsRepository;
@@ -22,14 +20,14 @@ appointmentsRouter.get("/", async (req, res) => {
 
 appointmentsRouter.post("/", async (req, res) => {
   try {
-    const { provider, date } = req.body;
+    const { provider_id, date } = req.body;
 
     const parsedDate = parseISO(date);
 
     const createAppointmentService = new CreateAppointmetService();
 
     const appointment = await createAppointmentService.execute({
-      provider,
+      provider_id,
       date: parsedDate,
     });
 
