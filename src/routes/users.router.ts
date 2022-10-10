@@ -5,6 +5,7 @@ import uploadConfig from "../config/upload";
 
 import CreateUserService from "../services/CreateUserService";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+import UpdateUserAvatarService from "../services/UpdateUserAvatarService";
 
 const usersRouter = Router();
 
@@ -39,9 +40,24 @@ usersRouter.patch(
   ensureAuthenticated,
   upload.single("avatar"),
   async (req, res) => {
-    console.log(req.file);
+    try {
+      const updateUserAvatarService = new UpdateUserAvatarService();
 
-    return res.json({ ok: true });
+      if (req.file) {
+        const user = await updateUserAvatarService.execute({
+          user_id: req.user.id,
+          avatarFilename: req.file.filename,
+        });
+
+        return res.json({ user });
+      }
+
+      throw new Error("You must upload a file");
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(400).json({ error: err.message });
+      }
+    }
   }
 );
 
