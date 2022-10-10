@@ -4,8 +4,13 @@ import { startOfHour, parseISO } from "date-fns";
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 import CreateAppointmetService from "../services/CreateAppointmentService";
 
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+
 const appointmentsRouter = Router();
 const appointmentsRepository = AppointmentsRepository;
+
+// Vai aplicar o middleware em todas as rotas de agendamento
+appointmentsRouter.use(ensureAuthenticated);
 
 // Responsibilidade das rotas:
 // receber requisicao
